@@ -1,1 +1,4 @@
 /wordpress
+.DS_Store
+/db_data
+/wordpress_data
