@@ -1,0 +1,21 @@
+#pr-rotating-pages {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.pr-page {
+    display: none;
+    text-align: center;
+}
+
+.pr-page h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.pr-page div {
+    font-size: 1em;
+    color: #555;
+}
