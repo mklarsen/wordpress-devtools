@@ -44,6 +44,7 @@ function pr_admin_page() {
                     'pages' => [],
                     'times' => [],
                     'durations' => [],
+                    'orders' => [],
                     'title' => $new_set_name,
                 ];
                 update_option('pr_rotation_sets', $rotation_sets);
@@ -57,6 +58,7 @@ function pr_admin_page() {
                 'pages' => $_POST['pr_pages'] ?? [],
                 'times' => $_POST['pr_page_times'] ?? [],
                 'durations' => $_POST['pr_page_durations'] ?? [],
+                'orders' => $_POST['pr_page_orders'] ?? [],
                 'title' => sanitize_text_field($_POST['pr_set_title']),
             ];
 
@@ -68,6 +70,7 @@ function pr_admin_page() {
     $page_times = $rotation_sets[$current_set]['times'] ?? [];
     $set_title = $rotation_sets[$current_set]['title'] ?? $current_set;
     $page_durations = $rotation_sets[$current_set]['durations'] ?? [];
+    $page_orders = $rotation_sets[$current_set]['orders'] ?? [];
     $all_pages = get_posts(['post_type' => 'page', 'numberposts' => -1]);
     ?>
 
@@ -114,6 +117,8 @@ function pr_admin_page() {
                                     Starttid: <input type="time" name="pr_page_times[<?php echo esc_attr($page->ID); ?>][start]" value="<?php echo esc_attr($page_times[$page->ID]['start'] ?? '00:00'); ?>">
                                     Sluttid: <input type="time" name="pr_page_times[<?php echo esc_attr($page->ID); ?>][end]" value="<?php echo esc_attr($page_times[$page->ID]['end'] ?? '23:59'); ?>">
                                     Tid (seconds): <input type="number" name="pr_page_durations[<?php echo esc_attr($page->ID); ?>]" value="<?php echo esc_attr($page_durations[$page->ID] ?? '5'); ?>" min="1" style="width: 60px;">
+                                    Order: <input type="number" name="pr_page_orders[<?php echo esc_attr($page->ID); ?>]" value="<?php echo esc_attr($page_orders[$page->ID] ?? '0'); ?>" style="width: 60px;">
+
                                 </div>
                             <hr>
                             <br>

@@ -39,6 +39,12 @@ function pr_display_rotating_pages($atts) {
 
     $set_data = $rotation_sets[$atts['set']];
     $pages = $set_data['pages'];
+
+    uasort($pages, function($a, $b) use ($set_data) {
+        return ($set_data['orders'][$a] ?? 0) <=> ($set_data['orders'][$b] ?? 0);
+    });
+    
+
     $page_times = $set_data['times'];
     $current_time = current_time('H:i');
 
@@ -49,7 +55,7 @@ function pr_display_rotating_pages($atts) {
 
         if ($current_time >= $start_time && $current_time <= $end_time) {
             $page = get_post($page_id);
-            $output .= '<div class="pr-page" data-page-id="' . esc_attr($page_id) . '" data-duration="' . esc_attr($set_data['durations'][$page_id] ?? 5) . '">';
+            $output .= '<div class="pr-page" data-page-id="' . esc_attr($page_id) . '" data-duration="' . esc_attr($set_data['durations'][$page_id] ?? 5) . '" data-orders="' . esc_attr($set_data['orders'][$page_id] ?? 5) . '"    >';
             $output .= '<div>' . wp_kses_post(apply_filters('the_content', $page->post_content)) . '</div>';
             $output .= '</div>';
         }
