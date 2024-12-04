@@ -1,0 +1,13 @@
+{
+    "deploy": {
+        
+        "targets": [
+            {
+                "type": "local",
+                "name": "TemaDeploy",
+                "description": "Deploy local Wordpresss Tema",
+                "dir": "/Users/martinkl/github/mklarsen/wordpress-devtools/wordpress_data/wp-content/themes/page_rotation/"
+            }
+        ]
+    }
+}

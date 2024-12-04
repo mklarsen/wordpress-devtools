@@ -1,0 +1,41 @@
+/* Page Rotator Plugin -styles */
+
+.pr-rotating-pages {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pr-page {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1s ease, transform 1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background-color: #000;
+    color: #fff;*/
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.pr-page.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Tekst og titler */
+.pr-page h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.pr-page div {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}

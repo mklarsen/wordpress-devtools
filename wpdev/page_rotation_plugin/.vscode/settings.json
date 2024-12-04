@@ -1,0 +1,13 @@
+{
+    "deploy": {
+        
+        "targets": [
+            {
+                "type": "local",
+                "name": "PluginDeploy",
+                "description": "Deploy local Wordpresss Plugin",
+                "dir": "/Users/martinkl/github/mklarsen/wordpress-devtools/wordpress_data/wp-content/plugins/page_rotation/"
+            }
+        ]
+    }
+}

@@ -1,0 +1,24 @@
+/*
+Theme Name: Page Rotator Theme
+Theme URI: https://krauslarsen.com/
+Author: MKLarsen
+Author URI: https://krauslarsen.com/
+Description: Frontend for Page Rotator, Minimalistisk Tema -pluginet
+Version: 5.7
+*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#main-content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+/* Styling håndteres generelt af Page Rotator Plugin */
