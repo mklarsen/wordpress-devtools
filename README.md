@@ -12,3 +12,14 @@ Configure Wordpress:
 
 That's it! Wordpress was **installed** and **configured** without any manual
 clicks in some interface and is now ready to be visited at http://localhost .
+
+
+
+# cd project dir SOME_PATH/wordpress-devtools
+
+# Build and run it localy
+docker compose up --build
+
+# Stop and clean
+docker compose down; rm -r db_data wordpress_data
+
