@@ -2,16 +2,13 @@ jQuery(document).ready(function($) {
     const $pages = $('#pr-rotating-pages .pr-page');
     let currentIndex = 0;
 
-    let durations = $pages.map(function() {
-        return $(this).data('duration') || 5000; // Default 5 sec
-    }).get();
-
     let d = $pages.map(function() {
         console.info( $(this).data() ); // Print all data attributes    
     }).get();
-
     
-        
+    let durations = $pages.map(function() {
+        return $(this).data('duration') || 5000; // Default 5 sec
+    }).get();
 
     function showNextPage() {
         $pages.removeClass('active');
