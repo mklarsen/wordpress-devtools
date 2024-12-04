@@ -1,8 +1,6 @@
-/wordpress
-.DS_Store
 /db_data
 /wordpress_data
 /backups
+
+.DS_Store
 *.zip
-*.zip
-/backups
