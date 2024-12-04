@@ -43,7 +43,8 @@ services:
       - wordpress
     volumes:
       - ./wordpress_data:/var/www/html
-      - ./docker/wordpress/nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/wordpress/nginx/server.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/wordpress/nginx/http.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 80:80
 
