@@ -1,6 +1,15 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
+
+function pr_generate_checksum($data) {
+    $v = hash('sha256', json_encode($data));
+    echo "pr_generate_checksum:";
+    print_r($v);
+    return $v;
+}
+
+
 // Registrer admin-menu
 function pr_add_admin_menu() {
     add_menu_page(
@@ -31,6 +40,10 @@ function pr_admin_page() {
             update_option('pr_rotation_sets', $rotation_sets);
             echo '<div class="updated"><p>Rotationssættet blev slettet.</p></div>';
         }
+        
+        // Update checksum
+        $checksum = pr_generate_checksum($rotation_sets);
+        update_option('pr_rotation_checksum', $checksum);
     }
 
     // Håndter formularindsendelse
@@ -64,6 +77,10 @@ function pr_admin_page() {
 
             update_option('pr_rotation_sets', $rotation_sets);
         }
+
+        // Update checksum
+        $checksum = pr_generate_checksum($rotation_sets);
+        update_option('pr_rotation_checksum', $checksum);
     }
 
     $selected_pages = $rotation_sets[$current_set]['pages'] ?? [];

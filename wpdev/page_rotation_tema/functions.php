@@ -90,4 +90,20 @@ function pr_theme_get_bg_color() {
 function pr_theme_get_selected_set() {
     return get_option('pr_theme_selected_set', 'default');
 }
+
+// Debug function til at skrive til browserens konsol
+function console($message, $type = 'info') {
+    $types = ['info', 'warn', 'error'];
+    if (!in_array($type, $types)) {
+        $type = 'info';
+    }
+    echo "<script>console.{$type}('" . addslashes($message) . "');</script>";
+}
+
+// Sæt cookie, hvis checksum ikke er sat
+function pr_theme_set_cookie() {
+    $checksum = get_option('pr_rotation_checksum', '');
+    setcookie("pr_rotation_checksum", $checksum, time() + (86400 * 30), "/"); // 86400 = 1 day
+}
+add_action('init', 'pr_theme_set_cookie', 'consolelog');
 ?>

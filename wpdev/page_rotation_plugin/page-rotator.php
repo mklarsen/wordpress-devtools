@@ -65,3 +65,47 @@ function pr_display_rotating_pages($atts) {
     return $output;
 }
 add_shortcode('page_rotator', 'pr_display_rotating_pages');
+
+
+
+/**
+ * Register a REST API endpoint to expose the checksum (v2)
+ */
+function pr_register_checksum_endpoint_v2() {
+    register_rest_route(
+        'page-rotator/v2', // Updated namespace for API v2
+        '/checksum',       // Endpoint URL
+        array(
+            'methods'  => 'GET',
+            'callback' => 'pr_get_checksum_v2',
+            'permission_callback' => '__return_true', // Public access
+        )
+    );
+}
+add_action('rest_api_init', 'pr_register_checksum_endpoint_v2');
+
+/**
+ * Callback function for v2 to return the checksum
+ *
+ * @return WP_REST_Response
+ */
+function pr_get_checksum_v2() {
+    $checksum = get_option('pr_rotation_checksum', '');
+
+    if (!$checksum) {
+        return new WP_REST_Response(array(
+            'status' => 'error',
+            'version' => 'v2',
+            'message' => 'Checksum not found.'
+        ), 404);
+    }
+
+    return new WP_REST_Response(array(
+        'status' => 'success',
+        'version' => 'v2',
+        'checksum' => $checksum,
+        'last_updated' => get_option('pr_rotation_last_updated', '') // Optional: Include metadata
+    ), 200);
+}
+
+?>

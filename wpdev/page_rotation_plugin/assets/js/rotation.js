@@ -32,6 +32,14 @@ jQuery(document).ready(function($) {
         }, durations[currentIndex] * 1000);
     }
 
+    function fetchCookieValue() {
+        const cookieName = 'pr_rotation_checksum';
+        const cookieValue = document.cookie.split('; ').find(row => row.startsWith(cookieName)).split('=')[1];
+        console.info('Cookie value:', cookieValue);
+    }
+
+    setInterval(fetchCookieValue, 20000); // Fetch cookie value every 20 seconds
+
     if ($pages.length > 0) {
         showNextPage(); // Start rotationen
     }
