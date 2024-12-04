@@ -1,7 +1,7 @@
 
 services:
   wordpress:
-    image: wordpress:6.7.1-php8.1-fpm-alpine
+    image: wordpress:6.7.1-php8.3-fpm-alpine
     depends_on:
       - wordpress_database
     environment:
@@ -21,6 +21,8 @@ services:
       WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
     volumes:
       - ./wordpress_data:/var/www/html
+      - ./docker/wordpress/php/wp.ini:/usr/local/etc/php/conf.d/wp.ini:ro
+      - ./docker/wordpress/ro_www/info.php:/var/www/html/info.php:ro
     ports:
       - 9000:9000
 
@@ -41,29 +43,29 @@ services:
       - wordpress
     volumes:
       - ./wordpress_data:/var/www/html
-      - ./docker/wordpress/nginx/app.conf:/etc/nginx/conf.d/default.conf:ro      
+      - ./docker/wordpress/nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - 80:80
 
-  wordpress_toolbox:
-    build: ./docker/wordpress/toolbox/
-    volumes:
-      - ./wordpress_data:/wordpress
-    working_dir: /wordpress
-    depends_on:
-      - wordpress_database
-    environment:
-      WORDPRESS_LOCALE: ${WORDPRESS_LOCALE}
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
-      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-      WORDPRESS_WEBSITE_TITLE: ${WORDPRESS_WEBSITE_TITLE}
-      # WORDPRESS_WEBSITE_URL: "http://example.com"
-      # WORDPRESS_WEBSITE_URL_WITHOUT_HTTP: "example.com"
-      WORDPRESS_WEBSITE_URL: ${WORDPRESS_WEBSITE_URL}
-      WORDPRESS_WEBSITE_URL_WITHOUT_HTTP: ${WORDPRESS_WEBSITE_URL_WITHOUT_HTTP}
-      WORDPRESS_WEBSITE_POST_URL_STRUCTURE: ${WORDPRESS_WEBSITE_POST_URL_STRUCTURE}
-      WORDPRESS_ADMIN_USER: ${WORDPRESS_ADMIN_USER}
-      WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
-      WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
+  # wordpress_toolbox:
+  #   build: ./docker/wordpress/toolbox/
+  #   volumes:
+  #     - ./wordpress_data:/wordpress
+  #   working_dir: /wordpress
+  #   depends_on:
+  #     - wordpress_database
+  #   environment:
+  #     WORDPRESS_LOCALE: ${WORDPRESS_LOCALE}
+  #     WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+  #     WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+  #     WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+  #     WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+  #     WORDPRESS_WEBSITE_TITLE: ${WORDPRESS_WEBSITE_TITLE}
+  #     # WORDPRESS_WEBSITE_URL: "http://example.com"
+  #     # WORDPRESS_WEBSITE_URL_WITHOUT_HTTP: "example.com"
+  #     WORDPRESS_WEBSITE_URL: ${WORDPRESS_WEBSITE_URL}
+  #     WORDPRESS_WEBSITE_URL_WITHOUT_HTTP: ${WORDPRESS_WEBSITE_URL_WITHOUT_HTTP}
+  #     WORDPRESS_WEBSITE_POST_URL_STRUCTURE: ${WORDPRESS_WEBSITE_POST_URL_STRUCTURE}
+  #     WORDPRESS_ADMIN_USER: ${WORDPRESS_ADMIN_USER}
+  #     WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
+  #     WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
